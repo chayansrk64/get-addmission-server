@@ -30,6 +30,7 @@ async function run() {
 
 
     const collegeCollection = client.db("addmissionDB").collection("college");
+    const studentCollection = client.db("addmissionDB").collection("student");
 
 
   // get all college data
@@ -45,7 +46,19 @@ async function run() {
         res.send(result);
     })
 
-    
+    // create students details
+    app.post('/students', async(req, res) => {
+        const student = req.body;
+        const result = await studentCollection.insertOne(student)
+        res.send(result)
+
+    })
+    // get student details
+    app.get('/students', async(req, res) => {
+        const result = await studentCollection.find().toArray();
+        res.send(result)
+    })
+
 
 
 
