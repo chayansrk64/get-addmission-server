@@ -31,7 +31,23 @@ async function run() {
 
     const collegeCollection = client.db("addmissionDB").collection("college");
     const studentCollection = client.db("addmissionDB").collection("student");
+    const reviewCollection = client.db("addmissionDB").collection("reviews");
+    const userCollection = client.db("addmissionDB").collection("users");
 
+
+    // users api
+    app.post('/users', async(req, res) => {
+       const user = req.body;
+        
+       const query =  {email: user.email}
+       const existingUser = await userCollection.findOne(query);
+        
+       if(existingUser){
+        return res.send({message: 'User Already Exists'})
+       }
+       const result = await userCollection.insertOne(user);
+       res.send(result)
+    })
 
   // get all college data
     app.get('/college', async(req, res) => {
@@ -56,6 +72,19 @@ async function run() {
     // get student details
     app.get('/students', async(req, res) => {
         const result = await studentCollection.find().toArray();
+        res.send(result)
+    })
+
+    // create review api
+    app.post('/reviews', async(req, res) => {
+        const review = req.body;
+        const result = await reviewCollection.insertOne(review)
+        res.send(result)
+    })
+
+    // get review api
+    app.get('/reviews', async(req, res) => {
+        const result = await reviewCollection.find().toArray();
         res.send(result)
     })
 
