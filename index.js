@@ -49,6 +49,15 @@ async function run() {
        res.send(result)
     })
 
+    app.get('/users/:email', async(req, res) => {
+        const email = req.params.email;
+        const user = await userCollection.findOne({email})
+        if(!user){
+          return res.send({message: 'user not found'})
+        }
+        res.send(user)
+    })
+
   // get all college data
     app.get('/college', async(req, res) => {
         const result = await collegeCollection.find().toArray();
