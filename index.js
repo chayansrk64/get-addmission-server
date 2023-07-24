@@ -63,6 +63,20 @@ async function run() {
         const result = await collegeCollection.find().toArray();
         res.send(result)
     })
+
+    // api with search query
+    // app.get('/college', async(req, res) => {
+    //     const search = req.query.search;
+    //     // console.log(search);
+    //     // const query = {}
+    //     const query = {college_name: {$regex: search, $options: "i"} }
+    //     const cursor =  collegeCollection.find(query);
+    //     const result = await cursor.toArray();
+    //     res.send(result)
+    // })
+
+
+
     // get a single college data
     app.get('/college/:id', async(req, res) => {
         const id = req.params.id;
