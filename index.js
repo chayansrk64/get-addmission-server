@@ -64,11 +64,12 @@ async function run() {
         res.send(result)
     })
 
+
     // api with search query
+
     // app.get('/college', async(req, res) => {
     //     const search = req.query.search;
-    //     // console.log(search);
-    //     // const query = {}
+        
     //     const query = {college_name: {$regex: search, $options: "i"} }
     //     const cursor =  collegeCollection.find(query);
     //     const result = await cursor.toArray();
